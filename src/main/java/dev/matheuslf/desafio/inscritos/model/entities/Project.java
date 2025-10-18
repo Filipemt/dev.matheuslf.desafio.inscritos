@@ -2,6 +2,7 @@ package dev.matheuslf.desafio.inscritos.model.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +21,17 @@ public class Project {
     private String description;
 
     @Column(name = "start_date")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @OneToMany(mappedBy = "projectId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
     public Project() {}
 
-    public Project(Long id, String name, String description, LocalDateTime startDate, LocalDateTime endDate, List<Task> tasks) {
+    public Project(Long id, String name, String description, LocalDate startDate, LocalDate endDate, List<Task> tasks) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -63,19 +64,19 @@ public class Project {
         this.description = description;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
