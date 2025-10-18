@@ -5,7 +5,7 @@ import dev.matheuslf.desafio.inscritos.model.enums.Status;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "task")
@@ -30,7 +30,7 @@ public class Task {
     private Priority priority;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
@@ -39,7 +39,7 @@ public class Task {
 
     public Task() {}
 
-    public Task(Long id, String title, String description, Status status, Priority priority, LocalDateTime dueDate, Project projectId) {
+    public Task(Long id, String title, String description, Status status, Priority priority, LocalDate dueDate, Project projectId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -89,11 +89,11 @@ public class Task {
         this.priority = priority;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
