@@ -1,4 +1,4 @@
-package dev.matheuslf.desafio.inscritos.model;
+package dev.matheuslf.desafio.inscritos.model.entities;
 
 import dev.matheuslf.desafio.inscritos.model.enums.Priority;
 import dev.matheuslf.desafio.inscritos.model.enums.Status;
