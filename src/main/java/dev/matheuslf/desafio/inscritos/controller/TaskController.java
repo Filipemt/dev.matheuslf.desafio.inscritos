@@ -3,7 +3,6 @@ package dev.matheuslf.desafio.inscritos.controller;
 import dev.matheuslf.desafio.inscritos.dtos.TaskRequestDTO;
 import dev.matheuslf.desafio.inscritos.dtos.TaskResponseDTO;
 import dev.matheuslf.desafio.inscritos.dtos.TaskUpdateDTO;
-import dev.matheuslf.desafio.inscritos.model.entities.Task;
 import dev.matheuslf.desafio.inscritos.model.enums.Priority;
 import dev.matheuslf.desafio.inscritos.model.enums.Status;
 import dev.matheuslf.desafio.inscritos.service.TaskService;
