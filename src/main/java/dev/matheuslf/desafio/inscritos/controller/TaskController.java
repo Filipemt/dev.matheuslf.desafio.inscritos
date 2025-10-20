@@ -36,9 +36,9 @@ public class TaskController {
         return ResponseEntity.ok(taskService.saveTask(projectId, dto));
     }
 
-    @PutMapping("/{projectId}")
-    public ResponseEntity<Void> updateTask(@PathVariable Long projectId, @Valid @RequestBody TaskUpdateDTO dto) {
-        taskService.updateTask(projectId, dto);
+    @PutMapping("/{taskId}")
+    public ResponseEntity<Void> updateTask(@PathVariable Long taskId, @Valid @RequestBody TaskUpdateDTO dto) {
+        taskService.updateTask(taskId, dto);
         return ResponseEntity.noContent().build();
     }
 

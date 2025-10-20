@@ -43,9 +43,9 @@ public class TaskService {
                 .toList();
     }
 
-    public void updateTask(Long projectId, TaskUpdateDTO dto) {
-        Task existTask = taskRepository.findById(projectId)
-                .orElseThrow(() -> new NotFoundException("Projeto não encontrada"));
+    public void updateTask(Long taskId, TaskUpdateDTO dto) {
+        Task existTask = taskRepository.findById(taskId)
+                .orElseThrow(() -> new NotFoundException("Task não encontrada"));
 
         existTask.setStatus(dto.status());
         taskRepository.save(existTask);
