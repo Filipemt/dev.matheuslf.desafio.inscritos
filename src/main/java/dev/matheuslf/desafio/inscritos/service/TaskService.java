@@ -55,7 +55,7 @@ public class TaskService {
         if (!taskRepository.existsById(taskId)) {
             throw new NotFoundException("Task não encontrada!");
         }
-         projectRepository.deleteById(taskId);
+         taskRepository.deleteById(taskId);
     }
 
     private static TaskResponseDTO mapperToResponseDTO(Task savedTask) {
