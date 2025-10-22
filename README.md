@@ -1,90 +1,89 @@
-## 🧠 Desafio Técnico – Sistema de Gestão de Projetos e Demandas
+# API de Gerenciamento de Projetos e Tarefas
 
-### 📘 Contexto
-Sua missão é desenvolver uma **API RESTful em Java com Spring Boot** para gerenciar **projetos e tarefas (demandas)** de uma empresa.  
-O sistema será utilizado por um time de desenvolvimento para organizar suas entregas, acompanhar o status das tarefas e realizar análises simples.
+Esta é uma API RESTful para gerenciar projetos e suas tarefas associadas, construída com Spring Boot. A aplicação fornece endpoints para criar, consultar, atualizar e deletar projetos e tarefas, com um sistema de autenticação seguro baseado em JWT.
 
 ---
 
-## 🎯 Requisitos Técnicos
+## Funcionalidades
 
-### 🧱 1. Modelagem de Domínio
-
-A modelagem pode ser modificada pelo inscrito. Porém, precisa ser justificado o motivo.
-
-#### `Project`
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | UUID/Long | Identificador |
-| `name` | String (3–100) | **Obrigatório** |
-| `description` | String | Opcional |
-| `startDate` | Date | Início do projeto |
-| `endDate` | Date | Opcional |
-
-#### `Task`
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `id` | UUID/Long | Identificador |
-| `title` | String (5–150) | **Obrigatório** |
-| `description` | String | Detalhes da tarefa |
-| `status` | Enum | TODO / DOING / DONE |
-| `priority` | Enum | LOW / MEDIUM / HIGH |
-| `dueDate` | Date | Data limite |
-| `projectId` | FK(Project) | Relacionamento |
+- **Autenticação de Usuários**: Registro e login seguros utilizando JWT (JSON Web Tokens).
+- **Gerenciamento de Projetos**: Criação e listagem de projetos.
+- **Gerenciamento de Tarefas**: Criação, listagem (com filtros), atualização e exclusão de tarefas associadas a um projeto.
+- **Documentação da API**: Documentação interativa da API disponível via Swagger UI.
+- **Tratamento de Exceções Centralizado**: Respostas de erro padronizadas para uma experiência de API consistente.
 
 ---
 
-### 🌐 2. Endpoints REST
 
-| Método | Endpoint | Descrição |
-|---------|-----------|-----------|
-| **POST** | `/projects` | Criar novo projeto (`name` obrigatório) |
-| **GET** | `/projects` | Listar todos os projetos (paginação opcional) |
-| **POST** | `/tasks` | Criar nova tarefa vinculada a um projeto |
-| **GET** | `/tasks?status=&priority=&projectId=` | Buscar tarefas com filtros opcionais |
-| **PUT** | `/tasks/{id}/status` | Atualizar apenas o status da tarefa |
-| **DELETE** | `/tasks/{id}` | Remover tarefa |
+- **Backend**: Java 17, Spring Boot 3
+## Tecnologias Utilizadas
+- **Banco de Dados**: H2 InMemory Database
+- **Segurança**: Spring Security, JWT
+- **Documentação da API**: Springdoc (Swagger UI)
+- **Ferramenta de Build**: Maven
+- **Testes**: JUnit 5, Mockito, MockMvc
 
 ---
 
-## ✅ Requisitos Obrigatórios
-- 🧑‍💻 **Java 17+** e **Spring Boot 3+**  
-- 🧠 **Spring Data JPA**  
-- 🗄️ Banco Relacional (**PostgreSQL** ou **H2**)  
-- ✔️ **Bean Validation**  
-- 🧪 **Testes Automatizados**  
-  - Unitários (Services mockados)  
-  - Integração (Controllers com MockMvc ou Testcontainers)  
-- ⚠️ Tratamento de erros com `@ControllerAdvice`  
-- 📦 Uso de **DTOs** (`record` ou classes simples)  
-- 📘 **README** explicando como rodar o projeto
+## Pré-requisitos
+
+Antes de começar, garanta que você tenha o seguinte instalado:
+- [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) ou uma versão superior.
+- [Apache Maven](https://maven.apache.org/download.cgi)
+- Um cliente REST como [Postman](https://www.postman.com/downloads/) ou [Insomnia](https://insomnia.rest/download) para interagir com a API.
 
 ---
 
-## 🏅 Diferenciais (Pontos Extras)
-- 🧭 Documentação **Swagger / OpenAPI**  
-- 🔐 Autenticação simples com **JWT** ou Basic Auth  
-- 🐳 Configuração de **Docker** / **docker-compose**  
-- ⚡ Uso de **MapStruct** para mapeamento de DTOs  
-- 🔍 Testes de API com **RestAssured**
+## Como Rodar o Projeto
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone <https://github.com/Filipemt/dev.matheuslf.desafio.inscritos>
+    cd dev.matheuslf.desafio.inscritos
+    ```
+
+2.  **Compile o projeto com o Maven:**
+    ```bash
+    mvn clean install
+    ```
+
+3.  **Execute a aplicação:**
+    ```bash
+    mvn spring-boot:run
+    ```
+
+4.  **Acessando a aplicação:**
+    - A API estará disponível em `http://localhost:8080`.
+    - O console do banco de dados H2 pode ser acessado em `http://localhost:8080/h2-console`.
+      - **JDBC URL**: `jdbc:h2:mem:sistema-gestao-projetos-demandas`
+      - **Username**: `sa`
+      - **Password**: (deixe em branco)
 
 ---
 
-## 🛠️ Tags
-`#Java` `#SpringBoot` `#Backend` `#DesafioTecnico`  
-`#API` `#RestAPI` `#Docker` `#Kubernetes`  
-`#PostgreSQL` `#Oracle` `#JPA` `#Swagger`  
-`#RestAssured` `#CleanCode` `#SoftwareEngineering`
+## Utilizando a API
+
+### Documentação da API (Swagger UI)
+
+Após iniciar a aplicação, você pode acessar a documentação interativa do Swagger UI para visualizar e testar todos os endpoints disponíveis:
+
+- **URL**: `http://localhost:8080/swagger-ui.html`
+
+### Fluxo de Autenticação
+
+1.  **Registre um novo usuário** enviando uma requisição `POST` para `/auth/register`.
+2.  **Faça o login** enviando uma requisição `POST` para `/auth/login` com as credenciais registradas. Você receberá um token JWT na resposta.
+3.  **Autorize as requisições** incluindo o token JWT no cabeçalho `Authorization` para todos os endpoints protegidos (Projetos e Tarefas).
+    - **Formato do Cabeçalho**: `Authorization: Bearer <seu-token-jwt>`
 
 ---
 
-### 💡 Dica
-> Foque em **organização, boas práticas e clareza do código**.  
-> Um bom README e commits bem descritos também serão avaliados. 😉
+## Executando os Testes
 
----
+Este projeto inclui uma suíte completa de testes unitários e de integração para garantir a qualidade e a confiabilidade do código.
 
-### 🧾 Licença
-Este projeto foi desenvolvido exclusivamente para o **processo seletivo SIS Innov & Tech** e não deve ser utilizado para fins comerciais.
+Para executar todos os testes, execute o seguinte comando Maven a partir do diretório raiz do projeto:
 
----
+```bash
+mvn test
+```
